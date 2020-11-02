@@ -4,6 +4,7 @@ const locationCategorizer = require('./helpers/location.js');
 const levelCategorizer = require('./helpers/level.js');
 const consumptionStorageCalculator = require('./helpers/consumptionStorage.js');
 const partCost = require('./helpers/cost.js');
+const costLocalCalculator = require('./helpers/costLocal.js');
 
 const { Cart, Item } = require('./models');
 
@@ -68,6 +69,8 @@ class WarehouseController {
             stackBin,
             totalPallet,
             diameter,
+            wrapping,
+            stickerLabel,
             cartId
         } = req.body;
 
@@ -79,10 +82,12 @@ class WarehouseController {
         const sizeDimension = dimensionCategorizer(cargoType, volume, diameter);
         const totalWeight = +quantity * +weight;
         const handling = handlingCategorizer(cargoType, +weight);
+        const addedServices = [];
         let consumptionStorage = 0;
         let localSuggestion;
         let levelSuggestion;
         let cost;
+        let addedCost = 0;
 
         console.log(cargoType, weight)
         console.log(handling)
@@ -128,34 +133,81 @@ class WarehouseController {
             }
         }
 
-        try {
-            await Item.create({
-                type: cargoType,
-                warehouse_type: warehouseType,
-                storage_location: storageLocation,
-                quantity,
-                totalArea,
-                volume,
-                weight: totalWeight,
-                stack_per_bin: stackBin,
-                total_pallet: totalPallet,
-                diameter,
-                volume_quantity: volumeQty,
-                size_dimension: sizeDimension,
-                handling,
-                consumption_storage: consumptionStorage,
-                location: localSuggestion,
-                level: levelSuggestion,
-                cost,
-                CartId: cartId
-            })
-
-            res.status(201).json({
-                message: 'Success Add New Item'
-            })
-        } catch (error) {
-            console.error(error);
+        if (cargoType === 'Parts' && warehouseType === 'NON-PLB') {
+            const costLocal = costLocalCalculator(localSuggestion, consumptionStorage);
+            cost = costLocal;
         }
+
+        if (stickerLabel) {
+            addedCost += (1000 * consumptionStorage);
+            addedServices.push('Sticker Label');
+        }
+
+        if (wrapping) {
+            addedCost += (5000 * consumptionStorage);
+            addedServices.push('Wrapping');
+        }
+
+        const totalCost = cost + addedCost;
+
+        const obj = {
+            type: cargoType,
+            warehouse_type: warehouseType,
+            storage_location: storageLocation,
+            quantity,
+            total_area: totalArea,
+            volume,
+            weight: totalWeight,
+            stack_per_bin: stackBin,
+            total_pallet: totalPallet,
+            diameter,
+            volume_quantity: volumeQty,
+            size_dimension: sizeDimension,
+            handling,
+            consumption_storage: consumptionStorage,
+            location: localSuggestion,
+            level: levelSuggestion,
+            added_services: addedServices.join(', '),
+            cost,
+            added_cost: addedCost,
+            total_cost: totalCost,
+            CartId: cartId
+        }
+
+        console.log(obj)
+
+        // try {
+        //     await Item.create({
+        //         type: cargoType,
+        //         warehouse_type: warehouseType,
+        //         storage_location: storageLocation,
+        //         quantity,
+        //         total_area: totalArea,
+        //         volume,
+        //         weight: totalWeight,
+        //         stack_per_bin: stackBin,
+        //         total_pallet: totalPallet,
+        //         diameter,
+        //         volume_quantity: volumeQty,
+        //         size_dimension: sizeDimension,
+        //         handling,
+        //         consumption_storage: consumptionStorage,
+        //         location: localSuggestion,
+        //         level: levelSuggestion,
+        //         wrapping,
+        //         sticker_label: stickerLabel,
+        //         cost,
+        //         added_cost: addedCost,
+        //         total_cost: totalCost,
+        //         CartId: cartId
+        //     })
+
+        //     res.status(201).json({
+        //         message: 'Success Add New Item'
+        //     })
+        // } catch (error) {
+        //     console.error(error);
+        // }
     }
 
     static async deleteItems (req, res, next) {

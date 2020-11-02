@@ -2,7 +2,7 @@ const consumptionStorageCalculator = (location, totalArea, volumeQty) => {
     if (location === 'Floor') {
         return totalArea;
     } else if (location === 'Racking') {
-        return volumeQty / 26775;
+        return volumeQty / 26.775;
     } else if (location === 'Shelving') {
         return volumeQty / 0.088;
     } else if (location === ' Cabinet') {

@@ -32,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
     location: DataTypes.STRING,
     level: DataTypes.STRING,
     cost: DataTypes.DECIMAL,
+    added_cost: DataTypes.DECIMAL,
+    total_cost: DataTypes.DECIMAL,
+    added_services: DataTypes.STRING,
     CartId: DataTypes.INTEGER
   }, {
     sequelize,

@@ -10,7 +10,7 @@ const handlingCategorizer = (type, weight) => {
     } else if (type === 'Pipe' || type === 'Chain') {
         return pipeChainHandler(weight);
     } else {
-        otherHandler(weight);
+        return otherHandler(weight);
     }
 }
 

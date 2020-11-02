@@ -19,11 +19,11 @@ const tyreCategorizer = diameter => {
 }
 
 const nonTyreCategorizer = volume => {
-    if (volume >= 6000) {
+    if (volume >= 0.006) {
         return 'Large';
-    } else if (volume >= 1000) {
+    } else if (volume >= 0.001) {
         return 'Medium';
-    } else if (volume >= 125) {
+    } else if (volume >= 0.000125) {
         return 'Small'
     } else {
         return 'Very Small';

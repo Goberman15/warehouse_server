@@ -1,6 +1,6 @@
 const locationCategorizer = (volume) => {
     if (volume >= 1) {
-        return "Floor";
+        return "Floor Open";
     } else if (volume >= 0.02) {
         return "Racking";
     } else if (volume >= 0.0078) {

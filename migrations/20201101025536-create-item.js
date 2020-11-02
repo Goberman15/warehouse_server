@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      totalArea: {
+      total_area: {
         type: Sequelize.DECIMAL,
         allowNull: false
       },
@@ -71,6 +71,16 @@ module.exports = {
       cost: {
         type: Sequelize.DECIMAL,
         allowNull: false
+      },
+      added_cost: {
+        type: Sequelize.DECIMAL
+      },
+      total_cost: {
+        type: Sequelize.DECIMAL,
+        allowNull: false
+      },
+      added_services: {
+        type: Sequelize.STRING
       },
       CartId: {
       type: Sequelize.INTEGER,
