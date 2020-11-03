@@ -4,7 +4,7 @@ module.exports = {
             let error = err.errors.map(error => {
                 return error.message
             })
-            const errorMsg = error.join(', ')
+            const errorMsg = error.join(', ');
             res.status(400).json({
                 error: errorMsg
             })

@@ -61,6 +61,9 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           msg: 'Item Quantity can\'t be empty'
         },
+        isInt: {
+          msg: 'Item Quantity must be a number'
+        },
         isGreaterThanZero (val) {
           if (val <= 0) {
             throw('Item Quantity must be greater than zero');
@@ -72,6 +75,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
+        isInt: {
+          msg: 'All required dimension field must be a number'
+        },
         isGreaterThanZero(val) {
           if (val <= 0) {
             throw('All required dimension field must be greater than 0');
@@ -83,6 +89,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
+        isInt: {
+          msg: 'All required dimension field must be a number'
+        },
         isGreaterThanZero(val) {
           if (val <= 0) {
             throw('All required dimension field must be greater than 0');
@@ -96,6 +105,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           msg: 'Item Weight can\'t be empty'
+        },
+        isInt: {
+          msg: 'Item Weight must be a number'
         },
         isGreaterThanZero (val) {
           if (val <= 0) {
