@@ -15,27 +15,152 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Item.init({
-    type: DataTypes.STRING,
-    warehouse_type: DataTypes.STRING,
-    storage_location: DataTypes.STRING,
-    quantity: DataTypes.INTEGER,
-    totalArea: DataTypes.DECIMAL,
-    volume: DataTypes.DECIMAL,
-    weight: DataTypes.DECIMAL,
-    stack_per_bin: DataTypes.INTEGER,
-    total_pallet: DataTypes.INTEGER,
-    diameter: DataTypes.DECIMAL,
-    volume_quantity: DataTypes.DECIMAL,
-    size_dimension: DataTypes.STRING,
-    handling: DataTypes.STRING,
-    consumption_storage: DataTypes.DECIMAL,
-    location: DataTypes.STRING,
-    level: DataTypes.STRING,
-    cost: DataTypes.DECIMAL,
-    added_cost: DataTypes.DECIMAL,
-    total_cost: DataTypes.DECIMAL,
-    added_services: DataTypes.STRING,
-    CartId: DataTypes.INTEGER
+    type: {
+      type: DataTypes.STRING,
+      allowNull: {
+        args: false,
+        msg: 'Cargo Type can\'t be empty'
+      },
+      validate: {
+        notEmpty: {
+          msg: 'Cargo Type can\'t be empty'
+        }
+      }
+    },
+    warehouse_type: {
+      type: DataTypes.STRING,
+      allowNull: {
+        args: false,
+        msg: 'Warehouse Type can\'t be empty'
+      },
+      validate: {
+        notEmpty: {
+          msg: 'Warehouse Type can\'t be empty'
+        }
+      }
+    },
+    storage_location: {
+      type: DataTypes.STRING,
+      allowNull: {
+        args: false,
+        msg: 'Storage Location can\'t be empty'
+      },
+      validate: {
+        notEmpty: {
+          msg: 'Storage Location can\'t be empty'
+        }
+      }
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: {
+        args: false,
+        msg: 'Item Quantity can\'t be empty'
+      },
+      validate: {
+        notEmpty: {
+          msg: 'Item Quantity can\'t be empty'
+        },
+        isGreaterThanZero (val) {
+          if (val <= 0) {
+            throw('Item Quantity must be greater than zero');
+          }
+        }
+      }
+    },
+    total_area: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+      validate: {
+        isGreaterThanZero(val) {
+          if (val <= 0) {
+            throw('All required dimension field must be greater than 0');
+          }
+        }
+      }
+    },
+    volume: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+      validate: {
+        isGreaterThanZero(val) {
+          if (val <= 0) {
+            throw('All required dimension field must be greater than 0');
+          }
+        }
+      }
+    },
+    weight: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Item Weight can\'t be empty'
+        },
+        isGreaterThanZero (val) {
+          if (val <= 0) {
+            throw('Item Weight must be greater than zero');
+          }
+        }
+      }
+    },
+    stack_per_bin: {
+      type: DataTypes.INTEGER
+    },
+    total_pallet: {
+      type: DataTypes.INTEGER
+    },
+    diameter: {
+      type: DataTypes.DECIMAL
+    },
+    volume_quantity: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    },
+    size_dimension: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    handling: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    consumption_storage: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    level: {
+      type: DataTypes.STRING
+    },
+    cost: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    },
+    added_cost: {
+      type: DataTypes.DECIMAL
+    },
+    total_cost: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    },
+    added_services: {
+      type: DataTypes.STRING
+    },
+    CartId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Carts',
+        key: 'id'
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
+      hooks: true
+    }
   }, {
     sequelize,
     modelName: 'Item',

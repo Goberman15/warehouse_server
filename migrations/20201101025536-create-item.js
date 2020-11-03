@@ -83,15 +83,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       CartId: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Carts',
-        key: 'id'
-      },
-      onUpdate: 'cascade',
-      onDelete: 'cascade',
-      hooks: true
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Carts',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
+        hooks: true
       },
       createdAt: {
         allowNull: false,

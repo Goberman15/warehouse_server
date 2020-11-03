@@ -20,8 +20,8 @@ class WarehouseController {
                 cart
             })
         } catch (error) {
-            // next(error);
             console.error(error);
+            next(error);
         }
     }
 
@@ -35,6 +35,7 @@ class WarehouseController {
 
         } catch (error) {
             console.error(error);
+            next(error);
         }
     }
 
@@ -54,6 +55,7 @@ class WarehouseController {
 
         } catch (error) {
             console.error(error);
+            next(error);
         }
     }
 
@@ -73,8 +75,6 @@ class WarehouseController {
             stickerLabel,
             cartId
         } = req.body;
-
-        console.log(req.body);
 
         const openYard = ['Tyre B (Non Stack)', 'Container 20 ft.', 'Container 40 ft.', 'Container HC 20 ft.', 'Container HC 20 ft.', 'Heavy Equipment'];
 
@@ -176,38 +176,16 @@ class WarehouseController {
 
         console.log(obj)
 
-        // try {
-        //     await Item.create({
-        //         type: cargoType,
-        //         warehouse_type: warehouseType,
-        //         storage_location: storageLocation,
-        //         quantity,
-        //         total_area: totalArea,
-        //         volume,
-        //         weight: totalWeight,
-        //         stack_per_bin: stackBin,
-        //         total_pallet: totalPallet,
-        //         diameter,
-        //         volume_quantity: volumeQty,
-        //         size_dimension: sizeDimension,
-        //         handling,
-        //         consumption_storage: consumptionStorage,
-        //         location: localSuggestion,
-        //         level: levelSuggestion,
-        //         wrapping,
-        //         sticker_label: stickerLabel,
-        //         cost,
-        //         added_cost: addedCost,
-        //         total_cost: totalCost,
-        //         CartId: cartId
-        //     })
+        try {
+            await Item.create(obj)
 
-        //     res.status(201).json({
-        //         message: 'Success Add New Item'
-        //     })
-        // } catch (error) {
-        //     console.error(error);
-        // }
+            res.status(201).json({
+                message: 'Success Add New Item'
+            })
+        } catch (error) {
+            console.error(error);
+            next(error);
+        }
     }
 
     static async deleteItems (req, res, next) {
@@ -225,6 +203,7 @@ class WarehouseController {
             })
         } catch (error) {
             console.error(error);
+            next(error);
         }
     }
 }
