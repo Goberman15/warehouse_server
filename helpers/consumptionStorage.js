@@ -1,5 +1,5 @@
 const consumptionStorageCalculator = (location, totalArea, volumeQty) => {
-    if (location === 'Floor') {
+    if (location.includes('Floor')) {
         return totalArea;
     } else if (location === 'Racking') {
         return volumeQty / 26.775;

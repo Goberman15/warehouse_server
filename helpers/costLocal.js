@@ -1,5 +1,5 @@
 const costLocalCalculator = (location, consumptionStorage) => {
-    if (location === 'Floor') {
+    if (location.includes('Floor')) {
         return (consumptionStorage * 77826);
     } else if (location === 'Racking') {
         return (consumptionStorage * 763252);

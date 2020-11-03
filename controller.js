@@ -76,6 +76,8 @@ class WarehouseController {
             cartId
         } = req.body;
 
+        console.log(req.body)
+
         const openYard = ['Tyre B (Non Stack)', 'Container 20 ft.', 'Container 40 ft.', 'Container HC 20 ft.', 'Container HC 20 ft.', 'Heavy Equipment'];
 
         const volumeQty = +quantity * volume;
@@ -88,9 +90,6 @@ class WarehouseController {
         let levelSuggestion;
         let cost;
         let addedCost = 0;
-
-        console.log(cargoType, weight)
-        console.log(handling)
 
         if (warehouseType === 'PLB') {
             localSuggestion = 'Floor'
@@ -115,6 +114,8 @@ class WarehouseController {
             }
         } else {
             if (cargoType === ' Parts') {
+                console.log('vol', volumeQty);
+                console.log('loc', localSuggestion);
                 cost = partCost(volumeQty, localSuggestion);
             } else if (storageLocation === 'Open Yard') {
                 cost = totalArea * 22000;
