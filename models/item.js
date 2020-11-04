@@ -73,31 +73,30 @@ module.exports = (sequelize, DataTypes) => {
     },
     total_area: {
       type: DataTypes.DECIMAL,
-      allowNull: false
-      // validate: {
-      //   isInt: {
-      //     msg: 'All required dimension field must be a number'
-      //   },
-      //   isGreaterThanZero(val) {
-      //     if (val <= 0) {
-      //       throw('All required dimension field must be greater than 0');
-      //     }
-      //   }
-      // }
+      allowNull: false,
+      validate: {
+        isDecimal: {
+          msg: 'All required dimension field must be a number'
+        },
+        isGreaterThanZero(val) {
+          if (val <= 0) {
+            throw('All required dimension field must be greater than 0');
+          }
+        }
+      }
     },
     volume: {
       type: DataTypes.DECIMAL,
-      allowNull: false
-      // validate: {
-      //   isInt: {
-      //     msg: 'All required dimension field must be a number'
-      //   },
-      //   isGreaterThanZero(val) {
-      //     if (val <= 0) {
-      //       throw('All required dimension field must be greater than 0');
-      //     }
-      //   }
-      // }
+      allowNull: false,
+      validate: {
+        isDecimal: {
+          msg: 'All required dimension field must be a number'
+        },
+        min: {
+          args: [0],
+          msg: 'All required dimension field must be greater than 0'
+        }
+      }
     },
     weight: {
       type: DataTypes.DECIMAL,

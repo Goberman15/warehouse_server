@@ -189,11 +189,30 @@ class WarehouseController {
         }
     }
 
+    static async deleteCart (req, res, next) {
+        const { id }  =req.params;
+
+        try {
+            await Cart.destroy({
+                where: {
+                    id
+                }
+            })
+
+            res.status(200).json({
+                message: `Success delete cart with id ${id}`
+            })
+        } catch (error) {
+            console.error(error);
+            next(error);
+        }
+    }
+
     static async deleteItems (req, res, next) {
         const { id } = req.params;
 
         try {
-            await Items.destroy({
+            await Item.destroy({
                 where: {
                     id
                 }
