@@ -181,7 +181,7 @@ class WarehouseController {
             await Item.create(obj)
 
             res.status(201).json({
-                message: 'Success Add New Item'
+                message: 'Success Store New Item'
             })
         } catch (error) {
             console.error(error);
