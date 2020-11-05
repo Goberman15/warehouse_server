@@ -161,7 +161,7 @@ class WarehouseController {
             weight: totalWeight,
             stack_per_bin: stackBin,
             total_pallet: totalPallet,
-            diameter,
+            diameter: diameter || 0,
             volume_quantity: volumeQty,
             size_dimension: sizeDimension,
             handling,

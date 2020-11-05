@@ -1,6 +1,8 @@
 const dimensionCategorizer = (type, volume, diameter) => {
     if (type.includes('Tyre')) {
         return tyreCategorizer(diameter);
+    } else if (type === 'Pallet' && type.includes('Container')) {
+        return '';
     } else {
         return nonTyreCategorizer(volume);
     } 
