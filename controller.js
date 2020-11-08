@@ -76,8 +76,6 @@ class WarehouseController {
             cartId
         } = req.body;
 
-        console.log(req.body)
-
         const openYard = ['Tyre B (Non Stack)', 'Container 20 ft.', 'Container 40 ft.', 'Container HC 20 ft.', 'Container HC 20 ft.', 'Heavy Equipment'];
 
         const volumeQty = +quantity * volume;
@@ -91,7 +89,7 @@ class WarehouseController {
         let cost;
         let addedCost = 0;
 
-        if (warehouseType === 'PLB') {
+        if (warehouseType === 'BLC') {
             localSuggestion = 'Floor'
         } else {
             if (cargoType === 'Parts') {
@@ -106,7 +104,7 @@ class WarehouseController {
             }
         }
 
-        if (warehouseType === 'PLB') {
+        if (warehouseType === 'BLC') {
             if (storageLocation === 'Open Yard') {
                 cost = totalArea * 22000;
             } else {
@@ -126,7 +124,7 @@ class WarehouseController {
             }
         }
 
-        if (warehouseType === 'NON-PLB') {
+        if (warehouseType === 'NON-BLC') {
             if (cargoType === 'Parts') {
                 consumptionStorage = consumptionStorageCalculator(localSuggestion, totalArea, volumeQty);
             } else {
@@ -134,7 +132,7 @@ class WarehouseController {
             }
         }
 
-        if (cargoType === 'Parts' && warehouseType === 'NON-PLB') {
+        if (cargoType === 'Parts' && warehouseType === 'NON-BLC') {
             const costLocal = costLocalCalculator(localSuggestion, consumptionStorage);
             cost = costLocal;
         }
