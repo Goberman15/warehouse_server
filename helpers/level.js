@@ -15,7 +15,7 @@ const cabinetLevel = weight => {
         return 'Level A / B';
     } else if (weight >= 160) {
         return 'Level C / D / F / G';
-    } else if (weight >= 80) {
+    } else {
         return 'Level H / J / K';
     }
 }
@@ -51,7 +51,7 @@ const rackLevel = weight => {
         return 'Level 5'
     } else if (weight >= 640) {
         return 'Level 6'
-    } else if (weight >= 480) {
+    } else {
         return 'Level 7'
     }
 }

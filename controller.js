@@ -16,7 +16,7 @@ class WarehouseController {
             const cart = await Cart.create();
     
             res.status(201).json({
-                message: 'Success Create Cart',
+                message: 'Success Create Inquiry',
                 cart
             })
         } catch (error) {
@@ -75,6 +75,8 @@ class WarehouseController {
             stickerLabel,
             cartId
         } = req.body;
+
+        console.log(req.body);
 
         const openYard = ['Tyre B (Non Stack)', 'Container 20 ft.', 'Container 40 ft.', 'Container HC 20 ft.', 'Container HC 20 ft.', 'Heavy Equipment'];
 
@@ -198,7 +200,7 @@ class WarehouseController {
             })
 
             res.status(200).json({
-                message: `Success delete cart with id ${id}`
+                message: `Success delete inquiry with id ${id}`
             })
         } catch (error) {
             console.error(error);
