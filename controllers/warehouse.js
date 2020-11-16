@@ -1,12 +1,12 @@
-const dimensionCategorizer = require('./helpers/sizeDimension.js');
-const handlingCategorizer = require('./helpers/handling.js');
-const locationCategorizer = require('./helpers/location.js');
-const levelCategorizer = require('./helpers/level.js');
-const consumptionStorageCalculator = require('./helpers/consumptionStorage.js');
-const partCost = require('./helpers/cost.js');
-const costLocalCalculator = require('./helpers/costLocal.js');
+const dimensionCategorizer = require('../helpers/sizeDimension.js');
+const handlingCategorizer = require('../helpers/handling.js');
+const locationCategorizer = require('../helpers/location.js');
+const levelCategorizer = require('../helpers/level.js');
+const consumptionStorageCalculator = require('../helpers/consumptionStorage.js');
+const partCost = require('../helpers/cost.js');
+const costLocalCalculator = require('../helpers/costLocal.js');
 
-const { Cart, Item } = require('./models');
+const { Cart, Item } = require('../models');
 
 class WarehouseController {
 
